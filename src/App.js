@@ -6,6 +6,7 @@ import Shop from './Components/Shop';
 import store from './redux'
 import Header from './Components/Header'
 import './App.css';
+import ProductDetails from './Components/ProductDetails';
 
 
 
@@ -34,6 +35,7 @@ class App extends React.Component{
                 <Route exact path='/' component={Home} />
                 <Route path='/shop' component={Shop} />
                 <Route path='/cart' component={Cart} />
+                <Route path='/itemdetails/:id' component = {ProductDetails} />
            </Switch>
           
         </Router>

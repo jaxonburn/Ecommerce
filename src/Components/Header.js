@@ -1,31 +1,27 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import $ from 'jquery';
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showMenu: false
+      showMenu: false,
+      clicks: 0
     };
-
-    this.showMenu = this.showMenu.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
   }
-
-  showMenu(event) {
-    event.preventDefault();
-
-    this.setState({ showMenu: true }, () => {
-      document.addEventListener("click", this.closeMenu);
-    });
+  componentDidMount() {
+    $(".menu").hide(0);
   }
-
-  closeMenu(event) {
-    if (!this.dropdownMenu.contains(event.target)) {
-      this.setState({ showMenu: false }, () => {
-        document.removeEventListener("click", this.closeMenu);
-      });
+  menu = (e) => {
+    this.setState({clicks: this.state.clicks + 1})
+    if(this.state.clicks % 2 === 0) {
+        $(".menu").slideDown(200);
+        $(e.target).css("transform", "rotateZ(90deg)")
+    } else if(this.state.clicks % 1 === 0) {
+      $(".menu").slideUp(200);
+      $(e.target).css("transform", "rotateZ(0deg)")
     }
   }
 
@@ -35,16 +31,7 @@ class Header extends Component {
         <div className="ShopName">
           <span>Store</span>
         </div>
-        <div className="bars">
-          <i className="fas fa-bars" onClick={this.showMenu}></i>
-        </div>
-        {this.state.showMenu ? (
-          <div
-            className="menu"
-            ref={element => {
-              this.dropdownMenu = element;
-            }}
-          >
+          <div className="menu">
             <button>
               {" "}
               <Link to="/">
@@ -59,13 +46,15 @@ class Header extends Component {
             </button>
             <button>
               <Link to="/cart">
-                <span className="menuitems">
+              <span className="menuitems">
                   <i className="fas fa-shopping-cart"></i>
-                </span>
+          </span>
               </Link>
             </button>
           </div>
-        ) : null}
+          <div className="bars">
+          <i className="fas fa-bars" onClick={this.menu}></i>
+        </div>
       </div>
     );
   }
