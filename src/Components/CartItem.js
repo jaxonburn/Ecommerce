@@ -24,12 +24,14 @@ class CartItem extends Component {
 
 
     RemoveFromCart = (product) => {
+
         
         store.dispatch({
             type: "DELETE_ITEM",
             product: product
           })
-          console.log(store.getState().firstReducer.Cart)
+  
+          
     }
 
 
@@ -43,7 +45,7 @@ class CartItem extends Component {
                 <div className="carttitle">{title}</div>
                 <img alt="shop item" src={img}></img>
                 <div>${price}</div>
-                <button className="trashicon"onClick={() => this.RemoveFromCart(this.props.product)}><i className="fas fa-trash-alt"></i></button>
+                <button className="trashicon"onClick={() => this.RemoveFromCart(this.props.product)}><i className="fas fa-trash-alt trash"></i></button>
             </div>
         
         )

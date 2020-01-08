@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import store from '../redux'
 import Item from './Item'
+import Filter from './Filter'
 
 
 
@@ -18,12 +19,15 @@ class Shop extends Component {
     
     
     return (
+      <div>
+        <Filter />
         <div className="products-page">
           {Products.map(product => (
             <Item product={product} key={product.id}/>
           ))}
           <div className="addCart">Added to Cart</div>
         </div>
+       </div>
     );
   }
 }

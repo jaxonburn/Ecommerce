@@ -9,18 +9,19 @@ const firstReducer = (state = initState, action) => {
                 product: action.product
             })
         }
-    }else if (action.type = "PROD_DETAILS"){
+    }else if (action.type === "PROD_DETAILS"){
         return {
             ...state,
             ProdDetails: action.product
         }
-    }else if (action.type = "DELETE_ITEM"){
+    }else if (action.type === "DELETE_ITEM"){
+        console.log(action.product);
         return {
             ...state,
-            Cart: state.Cart.filter(product => product.product !== action.product.product)
+            Cart: state.Cart.filter(product => product.product !== action.product),
         }
 
-    }
+    }else
     {
         return state
     }
