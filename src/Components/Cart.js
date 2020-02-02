@@ -58,7 +58,7 @@ class Cart extends Component {
         <div className="cart">
             <div className="leftCart">
             {Products.map(product => (
-            <CartItem product={product.product} key={uuid.v4()}/>
+            <CartItem product={product.product} id={product.id} key={uuid()}/>
           ))}
             </div>
             <div className="price">

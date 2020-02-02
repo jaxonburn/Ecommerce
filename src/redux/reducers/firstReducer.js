@@ -6,7 +6,8 @@ const firstReducer = (state = initState, action) => {
             ...state,
             Cart: state.Cart.concat({
                 quantity: 1,
-                product: action.product
+                product: action.product,
+                id: action.id
             })
         }
     }else if (action.type === "PROD_DETAILS"){
@@ -15,10 +16,9 @@ const firstReducer = (state = initState, action) => {
             ProdDetails: action.product
         }
     }else if (action.type === "DELETE_ITEM"){
-        console.log(action.product);
         return {
             ...state,
-            Cart: state.Cart.filter(product => product.product !== action.product),
+            Cart: state.Cart.filter(product => product.id !== action.id),
         }
 
     }else

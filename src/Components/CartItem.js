@@ -25,21 +25,14 @@ class CartItem extends Component {
 
     RemoveFromCart = (product) => {
 
-        
         store.dispatch({
             type: "DELETE_ITEM",
-            product: product
+            product: product,
+            id: this.props.id
           })
-  
-          
     }
-
-
-    
     render() {
-        
         const {title, img, price } = this.props.product
-        
         return (
             <div className="cartproduct">
                 <div className="carttitle">{title}</div>

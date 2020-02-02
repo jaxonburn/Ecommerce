@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import store from '../redux'
 import { Link } from "react-router-dom";
 import $ from 'jquery'
+import uuid from 'uuid'
 
 class Item extends Component {
 
@@ -28,7 +29,7 @@ class Item extends Component {
         store.dispatch({
             type: "ADD_ITEM",
             product: product,
-        
+            id: uuid()
           })
           $(".addCart").animate({marginLeft: '-600px', display: 'show'}, "slow");
           setTimeout(function(){ $(".addCart").animate({marginLeft: '0px'}, "slow") }, 2000);
@@ -36,7 +37,6 @@ class Item extends Component {
 
     
     render() {
-        
         const {title, img, price, id } = this.props.product
         
         return (
@@ -46,7 +46,7 @@ class Item extends Component {
                 <div>${price}</div>
                 <div className="moreinfo">
                     <Link className="button"to={`/itemdetails/${id}`}><button className="noBackground" onClick={() => this.showdetails(this.props.product)}>Details</button></Link>
-                    <button className="button noBackground"onClick={() => this.AddtoCart(this.props.product)}>Add to Cart</button>
+                    <button className="button noBackground" onClick={() => this.AddtoCart(this.props.product)}>Add to Cart</button>
                 </div>
             </div>
         
