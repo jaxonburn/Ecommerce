@@ -27,7 +27,8 @@ class Item extends Component {
     AddtoCart = (product) => {
         store.dispatch({
             type: "ADD_ITEM",
-            product: product
+            product: product,
+        
           })
           $(".addCart").animate({marginLeft: '-600px', display: 'show'}, "slow");
           setTimeout(function(){ $(".addCart").animate({marginLeft: '0px'}, "slow") }, 2000);

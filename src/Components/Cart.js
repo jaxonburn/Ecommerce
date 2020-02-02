@@ -25,13 +25,15 @@ class Cart extends Component {
     this.unsubscribe();
   }
 
-  loadingFunc(){
+  loadingFunc(total){
+    if(total === 0){
+      return;
+    }
     this.setState({
       checkOut: true
     })
     setTimeout(this.complete, 2000);
   }
-
   complete(){
     this.setState({
       complete: true
@@ -75,7 +77,7 @@ class Cart extends Component {
                   <h2>${total}</h2>
                   </div>
               </div>
-              <div className="CheckOut" onClick={this.loadingFunc}>Check Out</div>
+              <div className="CheckOut" onClick={ () => this.loadingFunc(total)}>Check Out</div>
             </div>
         </div>
     );

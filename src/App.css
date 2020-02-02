@@ -180,7 +180,11 @@ body {
   transform: scale(1.05);
   background: #3066BE;
 }
-
+.productDetailsContainer {
+  display: flex;
+  justify-content: center;
+  
+}
 .productDetails {
   width: 50%;
   margin: 8px 8px 8px 20px;

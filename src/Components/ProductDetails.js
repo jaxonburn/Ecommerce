@@ -4,24 +4,23 @@ import { Link } from "react-router-dom";
 import $ from 'jquery'
 
 export class ProductDetails extends Component {
-    AddtoCart(product){
+    AddtoCart = (product) => {
+        console.log(product)
         store.dispatch({
             type: "ADD_ITEM",
-            product: product
+            product: store.getState().firstReducer.ProdDetails
           })
          $(".addCart").animate({marginLeft: '-600px', display: 'show'}, "slow");
-         setTimeout(function(){ $(".addCart").animate({marginLeft: '0px'}, "slow") }, 2000);
-         
-         
-         
+         setTimeout(function(){ $(".addCart").animate({marginLeft: '0px'}, "slow") }, 2000);   
     }
     render() {
         if(store.getState().apiReduce.Loaded === false){
             return <div>Loading</div>
         }else{
         const {title, img, price, rating, description} = store.getState().firstReducer.ProdDetails
+        
         return (
-            
+        <div className="productDetailsContainer">
             <div className="productDetails">
                 <div className="productImg"><img alt="product"src={img}></img></div>
                 <div><h1>{title}</h1></div>
@@ -34,6 +33,7 @@ export class ProductDetails extends Component {
                 </div>
                 <div className="addCart">Added to Cart</div>
             </div>
+        </div>  
         )
         }
     }
