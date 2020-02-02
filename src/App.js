@@ -33,7 +33,7 @@ class App extends React.Component{
           <Router history={history}>
           <Header />
             <Switch>
-                <Route exact path='/store' component={Home} />
+                <Route exact path='/Ecommerce' component={Home} />
                 <Route path='/shop' component={Shop} />
                 <Route path='/cart' component={Cart} />
                 <Route path='/itemdetails/:id' component = {ProductDetails} />
