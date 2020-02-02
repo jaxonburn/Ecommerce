@@ -183,6 +183,7 @@ body {
 .productDetailsContainer {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
   
 }
 .productDetails {
@@ -201,8 +202,8 @@ body {
 }
 .productDetails img {
   object-fit: contain;
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   margin: 5px;
 }
 

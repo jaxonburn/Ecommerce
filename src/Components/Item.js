@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import store from '../redux'
-import { Link } from "react-router-dom";
 import $ from 'jquery'
 import uuid from 'uuid'
+import history from './history'
+
 
 class Item extends Component {
 
@@ -16,13 +17,22 @@ class Item extends Component {
         }
         
     }
-    
+    componentDidMount(){
+        this.unsubscribe = store.subscribe(() => this.forceUpdate());
+        store.dispatch({
+            type: "CLEAR_DETAILS"
+        })
+      }
+      componentWillUnmount(){
+        this.unsubscribe();
+      }
+
     showdetails(product){
         store.dispatch({
             type: "PROD_DETAILS",
-            product: product
+            product: product,
         })
-        
+        history.push(`/itemdetails/${this.props.product.id}`);
     }
 
     AddtoCart = (product) => {
@@ -38,14 +48,14 @@ class Item extends Component {
     
     render() {
         const {title, img, price, id } = this.props.product
-        
+    
         return (
             <div className="product">
                 <img alt="shop item" src={img}></img>
                 <div>{title}</div>
                 <div>${price}</div>
                 <div className="moreinfo">
-                    <Link className="button"to={`/itemdetails/${id}`}><button className="noBackground" onClick={() => this.showdetails(this.props.product)}>Details</button></Link>
+                    <div className="button" to={`/itemdetails/${id}`}><button className="noBackground" onClick={() => this.showdetails(this.props.product)}>Details</button></div>
                     <button className="button noBackground" onClick={() => this.AddtoCart(this.props.product)}>Add to Cart</button>
                 </div>
             </div>

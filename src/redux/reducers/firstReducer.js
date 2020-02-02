@@ -13,14 +13,18 @@ const firstReducer = (state = initState, action) => {
     }else if (action.type === "PROD_DETAILS"){
         return {
             ...state,
-            ProdDetails: action.product
+            ProdDetails: action.product,
         }
     }else if (action.type === "DELETE_ITEM"){
         return {
             ...state,
             Cart: state.Cart.filter(product => product.id !== action.id),
         }
-
+    }else if(action.type === "CLEAR_DETAILS"){
+        return{
+            ...state,
+            ProdDetails: {}
+        }
     }else
     {
         return state

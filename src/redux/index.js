@@ -5,7 +5,8 @@ import firstReducer from './reducers/firstReducer'
 export let initState = {
     Products: [],
     Cart: [],
-    Loaded: false
+    Loaded: false,
+    ProdDetails: {}
 }
 
 const reducer = combineReducers({

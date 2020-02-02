@@ -2,23 +2,48 @@ import React, { Component } from 'react'
 import store from '../redux'
 import { Link } from "react-router-dom";
 import $ from 'jquery'
+import uuid from 'uuid'
 
 export class ProductDetails extends Component {
-    AddtoCart = (product) => {
-        console.log(product)
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             loading: true
+        }
+        var int;
+        this.int = setInterval( () => {if(store.getState().firstReducer.ProdDetails.id !== undefined) {
+            this.setState({
+                  loading: false
+            })
+            clearInterval(int)
+        }
+          },500)
+    }
+    
+    componentDidMount(){
+        this.unsubscribe = store.subscribe(() => this.forceUpdate());
+      }
+      componentWillUnmount(){
+        clearInterval(this.int)
+        this.unsubscribe();
+      }
+
+    AddtoCart = () => {
         store.dispatch({
             type: "ADD_ITEM",
-            product: store.getState().firstReducer.ProdDetails
+            product: store.getState().firstReducer.ProdDetails,
+            id: uuid()
           })
          $(".addCart").animate({marginLeft: '-600px', display: 'show'}, "slow");
          setTimeout(function(){ $(".addCart").animate({marginLeft: '0px'}, "slow") }, 2000);   
     }
     render() {
-        if(store.getState().apiReduce.Loaded === false){
-            return <div>Loading</div>
-        }else{
+        if(this.state.loading === true){
+            return <div className="Loading"><i className="fas fa-spinner"></i></div>
+        }
         const {title, img, price, rating, description} = store.getState().firstReducer.ProdDetails
-        
+
         return (
         <div className="productDetailsContainer">
             <div className="productDetails">
@@ -29,7 +54,7 @@ export class ProductDetails extends Component {
                 <div><h2>{rating}/5</h2></div>
                 <div className="lr">
                     <Link className="button" to="/shop/">Back to Shop</Link>
-                    <div className="button" onClick={() => this.AddtoCart(this.props.product)}>Add to Cart</div>
+                    <div className="button" onClick={() => this.AddtoCart()}>Add to Cart</div>
                 </div>
                 <div className="addCart">Added to Cart</div>
             </div>
@@ -37,6 +62,6 @@ export class ProductDetails extends Component {
         )
         }
     }
-}
+
 
 export default ProductDetails

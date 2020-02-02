@@ -26,7 +26,6 @@ class Shop extends Component {
     this.unsubscribe();
   }
   first(){
-
     let int = setInterval( () => {if(document.readyState === 'complete') {
       this.setState({
         filtered: store.getState().apiReduce.Products.map(product => (

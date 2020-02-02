@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import Home from './Components/Home';
 import Cart from './Components/Cart';
 import Shop from './Components/Shop';
@@ -7,6 +7,7 @@ import store from './redux'
 import Header from './Components/Header'
 import './App.css';
 import ProductDetails from './Components/ProductDetails';
+import history from './Components/history'
 
 
 
@@ -29,7 +30,7 @@ class App extends React.Component{
 
     return (
       <div className="App">
-          <Router>
+          <Router history={history}>
           <Header />
             <Switch>
                 <Route exact path='/' component={Home} />
